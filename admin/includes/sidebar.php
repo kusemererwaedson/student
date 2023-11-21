@@ -10,7 +10,7 @@
       </div>
 
       <div class="row-lg-12 my-1 py-4">
-      <a class="text-white ml-3" style="text-decoration: none;" href=""><i class="fa-brands fa-discourse"></i>&nbsp;&nbsp;&nbsp;&nbsp;Courses</a>
+      <a class="text-white ml-3" style="text-decoration: none;" href="courses.php"><i class="fa-brands fa-discourse"></i>&nbsp;&nbsp;&nbsp;&nbsp;Courses</a>
       </div>
 
       <div class="row-lg-12 my-1 py-4">

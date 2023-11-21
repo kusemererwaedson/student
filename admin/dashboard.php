@@ -199,18 +199,22 @@
                 value=""
                 placeholder="Phone Number"
               />
+
+              <label for="faculty" class="my-2">Select Faculty</label>
               <select name="faculty" class="form-control my-2">
                 <?php while($faculty=mysqli_fetch_assoc($faculties)){?>
-
                 <option class="form-control my-2" value="<?= $faculty['id']; ?>"><?= $faculty['name']; ?></option>
                 <?php } ?>
               </select>
-              <select name="departments" class="form-control my-2">
-                <?php while($department=mysqli_fetch_assoc($departments)){?>
 
+              <label for="departments" class="my-2">Select Department</label>
+              <select name="departments" class="form-control my-2">
+                <?php while($department=mysqli_fetch_assoc($departments)){?> 
                 <option class="form-control my-2" value="<?= $department['id']; ?>"><?= $department['name']; ?></option>
                 <?php } ?>
               </select>
+
+              <label for="courses" class="my-2">Select Course</label>
               <select name="courses" class="form-control my-2">
                 <?php while($course=mysqli_fetch_assoc($courses)):?>
                 <option class="form-control my-2" value="<?= $course['id']; ?>"><?= $course['name']; ?></option>

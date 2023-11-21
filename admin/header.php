@@ -6,6 +6,7 @@ if(!isset($_SESSION['user-id'])){
     header('location: index.php');
     die();
 }
+ 
 ?>
 <!DOCTYPE html>
 <html lang="en">
