@@ -75,6 +75,23 @@
            ?></p>
           </div>
         <?php } ?>
+        <?php if(isset($_SESSION['editStudent-success'])){ ?>
+          <div class="alert alert-success mx-auto w-75">
+           <p>
+            <?= $_SESSION['editStudent-success']; 
+            unset($_SESSION['editStudent-success']);
+           ?></p>
+          </div>
+        <?php } ?>
+        
+        <?php if(isset($_SESSION['Edit-failure'])){ ?>
+          <div class="alert alert-danger mx-auto w-75">
+           <p>
+            <?= $_SESSION['Edit-failure']; 
+            unset($_SESSION['Edit-failure']);
+           ?></p>
+          </div>
+        <?php } ?>
         <div class="row">
           <div class="col-lg-12">
             <h5 class="text-center">Students</h5>

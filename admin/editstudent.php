@@ -35,6 +35,23 @@
      <div class="col-lg-6 mx-auto mb-3">
         <h3 class="text-info">Edit Students</h3>
      </div>
+     <hr class="bg-info">
+        <?php if(isset($_SESSION['editStudent'])){ ?>
+          <div class="alert alert-danger mx-auto w-75">
+           <p>
+            <?= $_SESSION['editStudent']; 
+            unset($_SESSION['editStudent']);
+           ?></p>
+          </div>
+        <?php } ?>
+        <?php if(isset($_SESSION['editStudent-success'])){ ?>
+          <div class="alert alert-success mx-auto w-75">
+           <p>
+            <?= $_SESSION['editStudent-success']; 
+            unset($_SESSION['editStudent-success']);
+           ?></p>
+          </div>
+        <?php } ?>
         <form action="../adminbackend/editStudent.php" class="form-horizontal w-50 mx-auto" method="POST" enctype="multipart/form-data">
              <input type="hidden" name="id" value="<?= $fetch['id'] ?>">
               <input

@@ -19,27 +19,27 @@ require 'config/database.php';
 
     // validate input values
     if(!$firstname){
-        $_SESSION['signup'] = "Please enter First Name";
+        $_SESSION['edittStudent'] = "Please enter First Name";
     }elseif(!$lastname){
-        $_SESSION['signup'] = "Please enter Last Name";
+        $_SESSION['edittStudent'] = "Please enter Last Name";
     }elseif(!$regnumber){
-        $_SESSION['signup'] = "Please enter Registration number";
+        $_SESSION['edittStudent'] = "Please enter Registration number";
     }elseif(!$email){
-        $_SESSION['signup'] = "Please enter a valid email";
+        $_SESSION['edittStudent'] = "Please enter a valid email";
     }elseif(!$phone){
-        $_SESSION['signup'] = "Please enter Phone Number";
+        $_SESSION['edittStudent'] = "Please enter Phone Number";
     }elseif(!$course_id){
-        $_SESSION['signup'] = "Please enter Course";
+        $_SESSION['edittStudent'] = "Please enter Course";
     }elseif(!$department_id){
-        $_SESSION['signup'] = "Please enter Department";
+        $_SESSION['edittStudent'] = "Please enter Department";
     }elseif(strlen($password) < 8){
-        $_SESSION['signup'] = "Password should be 8+ characters";
+        $_SESSION['edittStudent'] = "Password should be 8+ characters";
     }elseif(!$avatar['name']){
-        $_SESSION['signup'] = "Please add avatar";
+        $_SESSION['edittStudent'] = "Please add avatar";
     }else{
         //check if passwords don't match
         if($password !== $confirmpassword){
-            $_SESSION['signup'] = "Passwords do not match";
+            $_SESSION['editStudent'] = "Passwords do not match";
         }else{
             // hash password
             $hashed_password = password_hash($password, PASSWORD_DEFAULT);
@@ -85,7 +85,7 @@ require 'config/database.php';
     // redirect back to signup page if there was any problem
     if(isset($_SESSION['editStudent'])){
         // pass form data back to signup page
-        $_SESSION['signup-data'] = $_POST;
+        $_SESSION['editStudent-data'] = $_POST;
         header('location: ../admin/dashboard.php');
     }else{
         // insert new user into table
