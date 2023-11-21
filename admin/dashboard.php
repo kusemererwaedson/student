@@ -1,6 +1,11 @@
     <?php include ('header.php'); ?>
     <?php
 
+
+      // fetch students DESC from database
+      $query = "SELECT * FROM students";
+      $students = mysqli_query($connection,$query);
+
       // fetch courses from database
       $query = "SELECT * FROM courses";
       $courses = mysqli_query($connection,$query);
@@ -16,24 +21,10 @@
       // delete form data session
       unset($_SESSION['add-post-data']);
       ?>
-    <div class="side_bar ">
-      <div class="row-lg-12 my-1 text-center py-4 bg-info">
-        <div class="col-lg-12"><a style= "color: white;" href=""><i class="fa-solid fa-trash"></i>Dasboard</a></div>
-      </div>
-      <div class="row-lg-12 my-1 text-center py-4 bg-info">
-        <div class="col-lg-12"><a style= "color: white;" href="">Dasboard</a></div>
-      </div>
-      <div class="row-lg-12 my-1 text-center py-4 bg-info">
-        <div class="col-lg-12"><a style= "color: white;" href="">Dasboard</a></div>
-      </div>
-      <div class="row-lg-12 my-1 text-center py-4 bg-info">
-        <div class="col-lg-12"><a style= "color: white;" href="">Dasboard</a></div>
-      </div>
-      <div class="row-lg-12 my-1 text-center py-4 bg-info">
-        <div class="col-lg-12"><a style= "color: white;" href="">Dasboard</a></div>
-      </div>
-    </div>
-    <div class="main" style="margin-left: 20%;">
+   
+   <?php include('includes/sidebar.php') ?>
+
+    <div class="main" style="margin-left: 15%;">
       <div class="container">
         <div class="row mt-3">
                 <div class="col-lg-6">
@@ -41,7 +32,7 @@
                 </div>
                 <div class="col-lg-6">
                     <button class="btn btn-info float-right">
-                    <i class="fa-solid fa-person-circle-plus"></i>&nbsp;&nbsp;<a
+                    <i class="fa-solid fa-user-plus"></i>&nbsp;&nbsp;<a
                       href=""
                       data-bs-toggle="modal"
                       data-bs-target="#addStudent"
@@ -68,6 +59,22 @@
            ?></p>
           </div>
         <?php } ?>
+        <?php if(isset($_SESSION['delete-user-success'])){ ?>
+          <div class="alert alert-success mx-auto w-75">
+           <p>
+            <?= $_SESSION['delete-user-success']; 
+            unset($_SESSION['delete-user-success']);
+           ?></p>
+          </div>
+        <?php } ?>
+        <?php if(isset($_SESSION['delete-user-success'])){ ?>
+          <div class="alert alert-danger mx-auto w-75">
+           <p>
+            <?= $_SESSION['delete-user-success']; 
+            unset($_SESSION['delete-user-success']);
+           ?></p>
+          </div>
+        <?php } ?>
         <div class="row">
           <div class="col-lg-12">
             <h5 class="text-center">Students</h5>
@@ -84,246 +91,35 @@
                 </tr>
               </thead>
               <tbody>
+                <?php while($student = mysqli_fetch_assoc($students)): ?>
+                  <?php
+                        $course_id = $student['course_id'];
+                        $course_id_query= "SELECT * FROM courses WHERE id=$course_id";
+                        $course_id_result = mysqli_query($connection, $course_id_query);
+                        $course_id_name = mysqli_fetch_assoc($course_id_result);
+                        ?>
                 <tr>
-                  <td>KUSEMERERWA</td>
-                  <td>EDSON</td>
-                  <td style="width: 50px;">edsonkusemererwa@fms.lirauni.ac.ug</td>
-                  <td><img src="../images/manager.png" style="width: 50px; height: 50px; border-radius: 50%;"></td>
-                  <td>21/U/0461/LCS</td>
-                  <td>computer science</td>
+                  <td><?= $student['first_name'] ?></td>
+                  <td><?= $student['last_name'] ?></td>
+                  <td style="width: 50px;"><?= $student['email'] ?></td>
+                  <td><img src="../adminbackend/images/<?= $student['avatar'] ?>" style="width: 50px; height: 50px; border-radius: 50%;"></td>
+                  <td><?= $student['reg_number'] ?></td>
+                  <td><?= $course_id_name['name'] ?></td>
                   <td class="mx-auto">
                     <a
                       href=""
                       data-bs-toggle="modal"
                       data-bs-target="#editStudent"
-                      class="btn btn-warning"
-                      >Edit</a
-                    >
+                      class="text-warning"
+                      ><i class="fa-solid fa-pen-to-square"></i></a
+                    >&nbsp;&nbsp;&nbsp;&nbsp;
                     <a
-                      href=""
-                      data-bs-toggle="modal"
-                      data-bs-target="#deleteStudent"
-                      class="btn btn-danger"
-                      >Delete</a
+                      href="../adminbackend/deletestudent.php?id=<?= $student['id'] ?>"
+                      class="text-danger" onclick="return confirm('Do you want to delete user?');"
+                      ><i class="fa-solid fa-trash"></i></a
                     >
                   </td>
-                </tr>
-                <tr>
-                  <td>KUSEMERERWA</td>
-                  <td>EDSON</td>
-                  <td style="width: 50px;">edsonkusemererwa@fms.lirauni.ac.ug</td>
-                  <td><img src="../images/manager.png" style="width: 50px; height: 50px; border-radius: 50%;"></td>
-                  <td>21/U/0461/LCS</td>
-                  <td>computer science</td>
-                  <td class="mx-auto">
-                    <a
-                      href=""
-                      data-bs-toggle="modal"
-                      data-bs-target="#editStudent"
-                      class="btn btn-warning"
-                      >Edit</a
-                    >
-                    <a
-                      href=""
-                      data-bs-toggle="modal"
-                      data-bs-target="#deleteStudent"
-                      class="btn btn-danger"
-                      >Delete</a
-                    >
-                  </td>
-                </tr>
-                <tr>
-                  <td>KUSEMERERWA</td>
-                  <td>EDSON</td>
-                  <td style="width: 50px;">edsonkusemererwa@fms.lirauni.ac.ug</td>
-                  <td><img src="../images/manager.png" style="width: 50px; height: 50px; border-radius: 50%;"></td>
-                  <td>21/U/0461/LCS</td>
-                  <td>computer science</td>
-                  <td class="mx-auto">
-                    <a
-                      href=""
-                      data-bs-toggle="modal"
-                      data-bs-target="#editStudent"
-                      class="btn btn-warning"
-                      >Edit</a
-                    >
-                    <a
-                      href=""
-                      data-bs-toggle="modal"
-                      data-bs-target="#deleteStudent"
-                      class="btn btn-danger"
-                      >Delete</a
-                    >
-                  </td>
-                </tr>
-                <tr>
-                  <td>KUSEMERERWA</td>
-                  <td>EDSON</td>
-                  <td style="width: 50px;">edsonkusemererwa@fms.lirauni.ac.ug</td>
-                  <td><img src="../images/manager.png" style="width: 50px; height: 50px; border-radius: 50%;"></td>
-                  <td>21/U/0461/LCS</td>
-                  <td>computer science</td>
-                  <td class="mx-auto">
-                    <a
-                      href=""
-                      data-bs-toggle="modal"
-                      data-bs-target="#editStudent"
-                      class="btn btn-warning"
-                      >Edit</a
-                    >
-                    <a
-                      href=""
-                      data-bs-toggle="modal"
-                      data-bs-target="#deleteStudent"
-                      class="btn btn-danger"
-                      >Delete</a
-                    >
-                  </td>
-                </tr>
-                <tr>
-                  <td>KUSEMERERWA</td>
-                  <td>EDSON</td>
-                  <td style="width: 50px;">edsonkusemererwa@fms.lirauni.ac.ug</td>
-                  <td><img src="../images/manager.png" style="width: 50px; height: 50px; border-radius: 50%;"></td>
-                  <td>21/U/0461/LCS</td>
-                  <td>computer science</td>
-                  <td class="mx-auto">
-                    <a
-                      href=""
-                      data-bs-toggle="modal"
-                      data-bs-target="#editStudent"
-                      class="btn btn-warning"
-                      >Edit</a
-                    >
-                    <a
-                      href=""
-                      data-bs-toggle="modal"
-                      data-bs-target="#deleteStudent"
-                      class="btn btn-danger"
-                      >Delete</a
-                    >
-                  </td>
-                </tr>
-                <tr>
-                  <td>KUSEMERERWA</td>
-                  <td>EDSON</td>
-                  <td style="width: 50px;">edsonkusemererwa@fms.lirauni.ac.ug</td>
-                  <td><img src="../images/manager.png" style="width: 50px; height: 50px; border-radius: 50%;"></td>
-                  <td>21/U/0461/LCS</td>
-                  <td>computer science</td>
-                  <td class="mx-auto">
-                    <a
-                      href=""
-                      data-bs-toggle="modal"
-                      data-bs-target="#editStudent"
-                      class="btn btn-warning"
-                      >Edit</a
-                    >
-                    <a
-                      href=""
-                      data-bs-toggle="modal"
-                      data-bs-target="#deleteStudent"
-                      class="btn btn-danger"
-                      >Delete</a
-                    >
-                  </td>
-                </tr>
-                <tr>
-                  <td>KUSEMERERWA</td>
-                  <td>EDSON</td>
-                  <td style="width: 50px;">edsonkusemererwa@fms.lirauni.ac.ug</td>
-                  <td><img src="../images/manager.png" style="width: 50px; height: 50px; border-radius: 50%;"></td>
-                  <td>21/U/0461/LCS</td>
-                  <td>computer science</td>
-                  <td class="mx-auto">
-                    <a
-                      href=""
-                      data-bs-toggle="modal"
-                      data-bs-target="#editStudent"
-                      class="btn btn-warning"
-                      >Edit</a
-                    >
-                    <a
-                      href=""
-                      data-bs-toggle="modal"
-                      data-bs-target="#deleteStudent"
-                      class="btn btn-danger"
-                      >Delete</a
-                    >
-                  </td>
-                </tr>
-                <tr>
-                  <td>KUSEMERERWA</td>
-                  <td>EDSON</td>
-                  <td style="width: 50px;">edsonkusemererwa@fms.lirauni.ac.ug</td>
-                  <td><img src="../images/manager.png" style="width: 50px; height: 50px; border-radius: 50%;"></td>
-                  <td>21/U/0461/LCS</td>
-                  <td>computer science</td>
-                  <td class="mx-auto">
-                    <a
-                      href=""
-                      data-bs-toggle="modal"
-                      data-bs-target="#editStudent"
-                      class="btn btn-warning"
-                      >Edit</a
-                    >
-                    <a
-                      href=""
-                      data-bs-toggle="modal"
-                      data-bs-target="#deleteStudent"
-                      class="btn btn-danger"
-                      >Delete</a
-                    >
-                  </td>
-                </tr>
-                <tr>
-                  <td>KUSEMERERWA</td>
-                  <td>EDSON</td>
-                  <td style="width: 50px;">edsonkusemererwa@fms.lirauni.ac.ug</td>
-                  <td><img src="../images/manager.png" style="width: 50px; height: 50px; border-radius: 50%;"></td>
-                  <td>21/U/0461/LCS</td>
-                  <td>computer science</td>
-                  <td class="mx-auto">
-                    <a
-                      href=""
-                      data-bs-toggle="modal"
-                      data-bs-target="#editStudent"
-                      class="btn btn-warning"
-                      >Edit</a
-                    >
-                    <a
-                      href=""
-                      data-bs-toggle="modal"
-                      data-bs-target="#deleteStudent"
-                      class="btn btn-danger"
-                      >Delete</a
-                    >
-                  </td>
-                </tr>
-                <tr>
-                  <td>KUSEMERERWA</td>
-                  <td>EDSON</td>
-                  <td style="width: 50px;">edsonkusemererwa@fms.lirauni.ac.ug</td>
-                  <td><img src="../images/manager.png" style="width: 50px; height: 50px; border-radius: 50%;"></td>
-                  <td>21/U/0461/LCS</td>
-                  <td>computer science</td>
-                  <td class="mx-auto">
-                    <a
-                      href=""
-                      data-bs-toggle="modal"
-                      data-bs-target="#editStudent"
-                      class="btn btn-warning"
-                      >Edit</a
-                    >
-                    <a
-                      href=""
-                      data-bs-toggle="modal"
-                      data-bs-target="#deleteStudent"
-                      class="btn btn-danger"
-                      >Delete</a
-                    >
-                  </td>
-                </tr>
+              <?php endwhile ?>
               </tbody>
             </table>
           </div>
@@ -516,24 +312,6 @@
           <div class="modal-footer"></div>
         </div>
       </div>
-    </div>
-    <!-- -------delete popup -------- -->
-    <div class="modal fade" id="deleteStudent" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-body text-center">
-                    <p>Do you want to Delete this Student</p>
-                    <form action="/deletestudent/" method="POST">
-                        <div class="text-center p-3">
-                            <button type="button" class="btn m-4 bg-primary"
-                                data-bs-dismiss="modal">No</button>
-                            <button type="submit" name="delete_student" class="btn btn-danger"
-                                id="confirmButton">Yes</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
     </div>
     <script
       src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
