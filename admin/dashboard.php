@@ -28,7 +28,7 @@
       <div class="container">
         <div class="row mt-3">
                 <div class="col-lg-6">
-                    <h3 class="text-info">Register Users</h3>
+                    <h3 class="text-info">Register Students</h3>
                 </div>
                 <div class="col-lg-6">
                     <button class="btn btn-info float-right">
@@ -37,7 +37,7 @@
                       data-bs-toggle="modal"
                       data-bs-target="#addStudent"
                       class="btn"
-                      >Add New User</a
+                      >Add New Student</a
                     >
                     </button>
                 </div>
@@ -107,9 +107,7 @@
                   <td><?= $course_id_name['name'] ?></td>
                   <td class="mx-auto">
                     <a
-                      href=""
-                      data-bs-toggle="modal"
-                      data-bs-target="#editStudent"
+                      href="editstudent.php?id=<?= $student['id'] ?>"
                       class="text-warning"
                       ><i class="fa-solid fa-pen-to-square"></i></a
                     >&nbsp;&nbsp;&nbsp;&nbsp;
@@ -226,86 +224,6 @@
               name="submit"
               class="btn btn-primary form-control">
                 Add student
-              </button>
-            </form>
-          </div>
-          <div class="modal-footer"></div>
-        </div>
-      </div>
-    </div>
-    <!-- -------------------edit popup--------------- -->
-    <div
-      class="modal fade"
-      id="editStudent"
-      data-bs-backdrop="static"
-      data-bs-keyboard="false"
-    >
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title">Edit Student</h5>
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            >
-              X
-            </button>
-          </div>
-          <div class="modal-body">
-          <form action="" class="form-horizontal" method="POST">
-              <input
-                type="text"
-                name="firstname"
-                class="form-control my-2"
-                value=""
-                placeholder="First Name"
-              />
-              <input
-                type="text"
-                name="lastname"
-                class="form-control my-2"
-                value=""
-                placeholder="Last Name"
-              />
-              <input
-                type="email"
-                name="email"
-                class="form-control my-2"
-                value=""
-                placeholder="Email"
-              />
-              <input
-                type="text"
-                name="lastname"
-                class="form-control my-2"
-                value=""
-                placeholder="Last Name"
-              />
-              <input
-                type="text"
-                name="phone"
-                class="form-control my-2"
-                value=""
-                placeholder="Phone Number"
-              />
-              <input
-                type="text"
-                name="password"
-                class="form-control my-2"
-                value=""
-                placeholder="password"
-              />
-              <label for="avatar" class="my-2">Upload Photo</label>
-              <input
-                type="file"
-                name="avatar"
-                class="form-control my-2 pd-2"
-                value=""
-              />
-              <button type="submit" class="btn btn-primary form-control">
-                Edit student
               </button>
             </form>
           </div>
