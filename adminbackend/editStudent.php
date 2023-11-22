@@ -19,23 +19,23 @@ require 'config/database.php';
 
     // validate input values
     if(!$firstname){
-        $_SESSION['edittStudent'] = "Please enter First Name";
+        $_SESSION['editStudent'] = "Please enter First Name";
     }elseif(!$lastname){
-        $_SESSION['edittStudent'] = "Please enter Last Name";
+        $_SESSION['editStudent'] = "Please enter Last Name";
     }elseif(!$regnumber){
-        $_SESSION['edittStudent'] = "Please enter Registration number";
+        $_SESSION['editStudent'] = "Please enter Registration number";
     }elseif(!$email){
-        $_SESSION['edittStudent'] = "Please enter a valid email";
+        $_SESSION['editStudent'] = "Please enter a valid email";
     }elseif(!$phone){
-        $_SESSION['edittStudent'] = "Please enter Phone Number";
+        $_SESSION['editStudent'] = "Please enter Phone Number";
     }elseif(!$course_id){
-        $_SESSION['edittStudent'] = "Please enter Course";
+        $_SESSION['editStudent'] = "Please enter Course";
     }elseif(!$department_id){
-        $_SESSION['edittStudent'] = "Please enter Department";
+        $_SESSION['editStudent'] = "Please enter Department";
     }elseif(strlen($password) < 8){
-        $_SESSION['edittStudent'] = "Password should be 8+ characters";
+        $_SESSION['editStudent'] = "Password should be 8+ characters";
     }elseif(!$avatar['name']){
-        $_SESSION['edittStudent'] = "Please add avatar";
+        $_SESSION['editStudent'] = "Please add avatar";
     }else{
         //check if passwords don't match
         if($password !== $confirmpassword){

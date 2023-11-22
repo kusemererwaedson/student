@@ -92,6 +92,14 @@
            ?></p>
           </div>
         <?php } ?>
+        <?php if(isset($_SESSION['editStudent'])){ ?>
+          <div class="alert alert-danger mx-auto w-75">
+           <p>
+            <?= $_SESSION['editStudent']; 
+            unset($_SESSION['editStudent']);
+           ?></p>
+          </div>
+        <?php } ?>
         <div class="row">
           <div class="col-lg-12">
             <h5 class="text-center">Students</h5>

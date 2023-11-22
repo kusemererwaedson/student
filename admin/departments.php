@@ -3,10 +3,6 @@
 <?php include('includes/sidebar.php'); ?>
 
 <?php
- // fetch courses from database
- $query = "SELECT * FROM courses";
- $courses = mysqli_query($connection,$query);
-
 // fetch departments from database
 $query = "SELECT * FROM departments";
 $departments = mysqli_query($connection,$query);
@@ -20,74 +16,50 @@ $faculties = mysqli_query($connection,$query);
     <div class="container">
     <div class="row mt-3">
                 <div class="col-lg-6">
-                    <h3 class="text-info">Manage Courses</h3>
+                    <h3 class="text-info">Manage Departments</h3>
                 </div>
                 <div class="col-lg-6">
                     <button class="btn btn-info float-right">
                     <i class="fa-solid fa-user-plus"></i>&nbsp;&nbsp;<a
                       href=""
                       data-bs-toggle="modal"
-                      data-bs-target="#addCourse"
+                      data-bs-target="#addDepartment"
                       class="btn"
-                      >Add New Course</a
+                      >Add New Departments</a
                     >
                     </button>
                 </div>
         </div>        
         <hr class="bg-info">
-        <?php if(isset($_SESSION['course'])){ ?>
+        <?php if(isset($_SESSION['department'])){ ?>
           <div class="alert alert-danger mx-auto w-75">
            <p>
-            <?= $_SESSION['course']; 
-            unset($_SESSION['course']);
+            <?= $_SESSION['department']; 
+            unset($_SESSION['department']);
            ?></p>
           </div>
         <?php } ?>
-        <?php if(isset($_SESSION['delete-course-success'])){ ?>
+        <?php if(isset($_SESSION['delete-department-success'])){ ?>
           <div class="alert alert-success mx-auto w-75">
            <p>
-            <?= $_SESSION['delete-course-success']; 
-            unset($_SESSION['delete-course-success']);
+            <?= $_SESSION['delete-department-success']; 
+            unset($_SESSION['delete-department-success']);
            ?></p>
           </div>
         <?php } ?>
-        <?php if(isset($_SESSION['course-failure'])){ ?>
+        <?php if(isset($_SESSION['department-failure'])){ ?>
           <div class="alert alert-danger mx-auto w-75">
            <p>
-            <?= $_SESSION['course-failure']; 
-            unset($_SESSION['course-failure']);
+            <?= $_SESSION['department-failure']; 
+            unset($_SESSION['department-failure']);
            ?></p>
           </div>
         <?php } ?>
-        <?php if(isset($_SESSION['course-success'])){ ?>
+        <?php if(isset($_SESSION['department-success'])){ ?>
           <div class="alert alert-success mx-auto w-75">
            <p>
-            <?= $_SESSION['course-success']; 
-            unset($_SESSION['course-success']);
-           ?></p>
-          </div>
-        <?php } ?>
-        <?php if(isset($_SESSION['editCourse-success'])){ ?>
-          <div class="alert alert-success mx-auto w-75">
-           <p>
-            <?= $_SESSION['editCourse-success']; 
-            unset($_SESSION['editCourse-success']);
-           ?></p>
-          </div>
-        <?php } ?>
-        <?php if(isset($_SESSION['Edit-failure'])){ ?>
-          <div class="alert alert-danger mx-auto w-75">
-           <p>
-            <?= $_SESSION['Edit-failure']; 
-            unset($_SESSION['Edit-failure']);
-           ?></p>
-          </div>
-        <?php } ?>
-        <?php if(isset($_SESSION['editCourse'])){ ?>
-          <div class="alert alert-danger mx-auto w-75">
-           <p>
-            <?= $_SESSION['editCourse']; 
-            unset($_SESSION['editCourse']);
+            <?= $_SESSION['department-success']; 
+            unset($_SESSION['department-success']);
            ?></p>
           </div>
         <?php } ?>
@@ -96,23 +68,23 @@ $faculties = mysqli_query($connection,$query);
                     <table class="table table-bordered table-striped">
                     <thead>
                         <tr>
-                        <th scope="col">COURSE NAME</th>
+                        <th scope="col">Departments NAME</th>
                         <th scope="col">ACTION</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <?php while($course = mysqli_fetch_assoc($courses)): ?>
+                        <?php while($department = mysqli_fetch_assoc($departments)): ?>
                         <tr>
-                        <td><?= $course['name'] ?></td>
+                        <td><?= $department['name'] ?></td>
                         <td class="mx-auto">
                             <a
-                            href="editcourses.php?id=<?= $course['id'] ?>"
+                            href="../adminbackend/editdepartment.php?id=<?= $epartment['id'] ?>"
                             class="text-warning"
                             ><i class="fa-solid fa-pen-to-square"></i></a
                             >&nbsp;&nbsp;&nbsp;&nbsp;
                             <a
-                            href="../adminbackend/deletecourse.php?id=<?= $course['id'] ?>"
-                            class="text-danger" onclick="return confirm('Do you want to delete course?');"
+                            href="../adminbackend/deletedepartments.php?id=<?= $department['id'] ?>"
+                            class="text-danger" onclick="return confirm('Do you want to delete Departments?');"
                             ><i class="fa-solid fa-trash"></i></a
                             >
                         </td>
@@ -124,17 +96,17 @@ $faculties = mysqli_query($connection,$query);
             </div>
         </div>
     </div>
-            <!-- -------------------addCourse popup--------------- -->
+            <!-- -------------------addDepartments popup--------------- -->
             <div
       class="modal fade"
-      id="addCourse"
+      id="addDepartment"
       data-bs-backdrop="static"
       data-bs-keyboard="false"
     >
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title">Add Course</h5>
+            <h5 class="modal-title">Add Departments</h5>
             <button
               type="button"
               class="btn-close"
@@ -145,14 +117,14 @@ $faculties = mysqli_query($connection,$query);
             </button>
           </div>
           <div class="modal-body">
-            <form action="../adminbackend/course.php" class="form-horizontal" method="POST" enctype="multipart/form-data">
+            <form action="../adminbackend/department.php" class="form-horizontal" method="POST" enctype="multipart/form-data">
 
               <input
                 type="text"
-                name="courseName"
+                name="departments"
                 class="form-control my-2"
                 value=""
-                placeholder="Course Name"
+                placeholder="Departments Name"
               />
 
               <label for="faculties" class="my-2">Select Faculty</label>
@@ -161,17 +133,10 @@ $faculties = mysqli_query($connection,$query);
                 <option class="form-control my-2" value="<?= $faculty['id']; ?>"><?= $faculty['name']; ?></option>
                 <?php } ?>
               </select>
-
-              <label for="departments" class="my-2">Select Department</label>
-              <select name="departments" class="form-control my-2">
-                <?php while($department=mysqli_fetch_assoc($departments)){?>
-                <option class="form-control my-2" value="<?= $department['id']; ?>"><?= $department['name']; ?></option>
-                <?php } ?>
-              </select>
               <button type="submit"
               name="submit"
               class="btn btn-primary form-control">
-                Add Course 
+                Add Department 
               </button>
             </form>
           </div>

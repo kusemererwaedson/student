@@ -52,6 +52,15 @@
            ?></p>
           </div>
         <?php } ?>
+        <?php if(isset($_SESSION['editStudent'])){ ?>
+          <div class="alert alert-success mx-auto w-75">
+           <p>
+            <?= $_SESSION['editStudent']; 
+            unset($_SESSION['editStudent']);
+           ?></p>
+          </div>
+        <?php } ?>
+        
         <form action="../adminbackend/editStudent.php" class="form-horizontal w-50 mx-auto" method="POST" enctype="multipart/form-data">
              <input type="hidden" name="id" value="<?= $fetch['id'] ?>">
               <input
