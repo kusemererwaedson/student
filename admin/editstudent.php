@@ -98,22 +98,16 @@
                 value="<?= $fetch['phone'] ?>"
                 placeholder="Phone Number"
               />
-              <select name="faculty" class="form-control my-2">
-                <?php while($faculty=mysqli_fetch_assoc($faculties)){?>
+              <select name="faculty" id="faculty" class="form-control my-2">
 
-                <option class="form-control my-2" value="<?= $faculty['id']; ?>"><?= $faculty['name']; ?></option>
-                <?php } ?>
+                <option class="form-control my-2" value="">Select Faculty</option>
               </select>
-              <select name="departments" class="form-control my-2">
-                <?php while($department=mysqli_fetch_assoc($departments)){?>
+              <select name="departments" id="departments" class="form-control my-2">
 
-                <option class="form-control my-2" value="<?= $department['id']; ?>"><?= $department['name']; ?></option>
-                <?php } ?>
+                <option class="form-control my-2" value="">Select Departments</option>
               </select>
-              <select name="courses" class="form-control my-2">
-                <?php while($course=mysqli_fetch_assoc($courses)):?>
-                <option class="form-control my-2" value="<?= $course['id']; ?>"><?= $course['name']; ?></option>
-                <?php endwhile ?>
+              <select name="courses" id="courses" class="form-control my-2">
+                <option class="form-control my-2" value="">Select Course</option>
               </select>
 
               <label for="reg_status" class="my-2">Select Registration status</label>
@@ -170,3 +164,66 @@
               </button>
             </form>
  </div>            
+
+ <script>
+        $(document).ready(function() {
+            // Populate categories dropdown on page load
+            $.ajax({
+                type: 'GET',
+                url: 'jquery/getfaculty.php',
+                dataType: 'json',
+                success: function(data) {
+                    $.each(data, function(index, faculty) {
+                        $('#faculty').append('<option value="' + faculty.id + '">' + faculty.name + '</option>');
+                    });
+                }
+            });
+
+            // Handle category change event
+            $('#faculty').change(function() {
+                var faculty_id = $(this).val();
+
+                // Clear subcategory dropdown
+                 // Clear subcategory dropdown
+                 $('#departments').html('<option value="">Select Department</option>');
+
+                if (faculty_id !== '') {
+                    // Populate subcategories dropdown based on selected category
+                    $.ajax({
+                        type: 'POST',
+                        url: 'jquery/getdepartments.php',
+                        data: { faculty_id: faculty_id },
+                        dataType: 'json',
+                        success: function(data) {
+                            $.each(data, function(index, department) {
+                                $('#departments').append('<option value="' + department.id + '">' + department.name + '</option>');
+                            });
+                        }
+                    });
+                }
+            });
+              // Handle department change event
+              $('#departments').change(function() {
+                var department_id = $(this).val();
+
+                // Clear subcategory dropdown
+                 // Clear subcategory dropdown
+                 $('#courses').html('<option value="">Select Course</option>');
+
+                if (department_id !== '') {
+                    // Populate subcategories dropdown based on selected category
+                    $.ajax({
+                        type: 'POST',
+                        url: 'jquery/getcourse.php',
+                        data: { department_id: department_id },
+                        dataType: 'json',
+                        success: function(data) {
+                            $.each(data, function(index, course) {
+                                $('#courses').append('<option value="' + course.id + '">' + course.name + '</option>');
+                            });
+                        }
+                    });
+                }
+            });
+        });
+    </script>

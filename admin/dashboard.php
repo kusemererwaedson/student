@@ -213,24 +213,18 @@
               />
 
               <label for="faculty" class="my-2">Select Faculty</label>
-              <select name="faculty" class="form-control my-2">
-                <?php while($faculty=mysqli_fetch_assoc($faculties)){?>
-                <option class="form-control my-2" value="<?= $faculty['id']; ?>"><?= $faculty['name']; ?></option>
-                <?php } ?>
+              <select name="faculty" id="faculty" class="form-control my-2">
+                <option class="form-control my-2" value="">Select Faculty</option>
               </select>
 
               <label for="departments" class="my-2">Select Department</label>
-              <select name="departments" class="form-control my-2">
-                <?php while($department=mysqli_fetch_assoc($departments)){?> 
-                <option class="form-control my-2" value="<?= $department['id']; ?>"><?= $department['name']; ?></option>
-                <?php } ?>
+              <select name="departments" id="departments" class="form-control my-2">
+                <option class="form-control my-2" value="">Select Department</option>
               </select>
 
               <label for="courses" class="my-2">Select Course</label>
-              <select name="courses" class="form-control my-2">
-                <?php while($course=mysqli_fetch_assoc($courses)):?>
-                <option class="form-control my-2" value="<?= $course['id']; ?>"><?= $course['name']; ?></option>
-                <?php endwhile ?>
+              <select name="courses" id="courses" class="form-control my-2">
+                <option class="form-control my-2" value="">Select Courses</option>
               </select>
 
               <label for="reg_status" class="my-2">Select Registration status</label>
@@ -290,6 +284,69 @@
         </div>
       </div>
     </div>
+    
+ <script>
+        $(document).ready(function() {
+            // Populate categories dropdown on page load
+            $.ajax({
+                type: 'GET',
+                url: 'jquery/getfaculty.php',
+                dataType: 'json',
+                success: function(data) {
+                    $.each(data, function(index, faculty) {
+                        $('#faculty').append('<option value="' + faculty.id + '">' + faculty.name + '</option>');
+                    });
+                }
+            });
+
+            // Handle category change event
+            $('#faculty').change(function() {
+                var faculty_id = $(this).val();
+
+                // Clear subcategory dropdown
+                 // Clear subcategory dropdown
+                 $('#departments').html('<option value="">Select Department</option>');
+
+                if (faculty_id !== '') {
+                    // Populate subcategories dropdown based on selected category
+                    $.ajax({
+                        type: 'POST',
+                        url: 'jquery/getdepartments.php',
+                        data: { faculty_id: faculty_id },
+                        dataType: 'json',
+                        success: function(data) {
+                            $.each(data, function(index, department) {
+                                $('#departments').append('<option value="' + department.id + '">' + department.name + '</option>');
+                            });
+                        }
+                    });
+                }
+            });
+              // Handle department change event
+              $('#departments').change(function() {
+                var department_id = $(this).val();
+
+                // Clear subcategory dropdown
+                 // Clear subcategory dropdown
+                 $('#courses').html('<option value="">Select Course</option>');
+
+                if (department_id !== '') {
+                    // Populate subcategories dropdown based on selected category
+                    $.ajax({
+                        type: 'POST',
+                        url: 'jquery/getcourse.php',
+                        data: { department_id: department_id },
+                        dataType: 'json',
+                        success: function(data) {
+                            $.each(data, function(index, course) {
+                                $('#courses').append('<option value="' + course.id + '">' + course.name + '</option>');
+                            });
+                        }
+                    });
+                }
+            });
+        });
+    </script>
     <script
       src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
       integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"

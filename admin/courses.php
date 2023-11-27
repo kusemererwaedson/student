@@ -156,17 +156,13 @@ $faculties = mysqli_query($connection,$query);
               />
 
               <label for="faculties" class="my-2">Select Faculty</label>
-              <select name="faculties" class="form-control my-2">
-                <?php while($faculty=mysqli_fetch_assoc($faculties)){?>
-                <option class="form-control my-2" value="<?= $faculty['id']; ?>"><?= $faculty['name']; ?></option>
-                <?php } ?>
+              <select name="faculties" id="faculty" class="form-control my-2">
+                <option class="form-control my-2" value="">Select Faculty</option>
               </select>
 
               <label for="departments" class="my-2">Select Department</label>
-              <select name="departments" class="form-control my-2">
-                <?php while($department=mysqli_fetch_assoc($departments)){?>
-                <option class="form-control my-2" value="<?= $department['id']; ?>"><?= $department['name']; ?></option>
-                <?php } ?>
+              <select name="departments" id="departments" class="form-control my-2">
+                <option class="form-control my-2" value="">Select Department</option>
               </select>
               <button type="submit"
               name="submit"
@@ -179,3 +175,44 @@ $faculties = mysqli_query($connection,$query);
         </div>
       </div>
     </div>
+
+     
+ <script>
+        $(document).ready(function() {
+            // Populate categories dropdown on page load
+            $.ajax({
+                type: 'GET',
+                url: 'jquery/getfaculty.php',
+                dataType: 'json',
+                success: function(data) {
+                    $.each(data, function(index, faculty) {
+                        $('#faculty').append('<option value="' + faculty.id + '">' + faculty.name + '</option>');
+                    });
+                }
+            });
+
+            // Handle category change event
+            $('#faculty').change(function() {
+                var faculty_id = $(this).val();
+
+                // Clear subcategory dropdown
+                 // Clear subcategory dropdown
+                 $('#departments').html('<option value="">Select Department</option>');
+
+                if (faculty_id !== '') {
+                    // Populate subcategories dropdown based on selected category
+                    $.ajax({
+                        type: 'POST',
+                        url: 'jquery/getdepartments.php',
+                        data: { faculty_id: faculty_id },
+                        dataType: 'json',
+                        success: function(data) {
+                            $.each(data, function(index, department) {
+                                $('#departments').append('<option value="' + department.id + '">' + department.name + '</option>');
+                            });
+                        }
+                    });
+                }
+            });
+        });
+    </script>

@@ -78,14 +78,15 @@ $faculties = mysqli_query($connection,$query);
                             href="editfaculties.php?id=<?= $faculty['id'] ?>"
                             class="text-warning"
                             ><i class="fa-solid fa-pen-to-square"></i></a
-                            >&nbsp;&nbsp;&nbsp;&nbsp;
+                            >
+                            &nbsp;&nbsp;&nbsp;&nbsp;
                             <a
                             href="../adminbackend/deletefaculties.php?id=<?= $faculty['id'] ?>"
                             class="text-danger" onclick="return confirm('Do you want to delete Departments?');"
                             ><i class="fa-solid fa-trash"></i></a
                             >
                         </td>
-                        <?php endwhile ?>
+                             <?php endwhile ?>
                     </tbody>
                     </table>
                 </div>

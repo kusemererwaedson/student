@@ -6,6 +6,8 @@
  if(isset($_GET['id'])){
     $id = filter_var($_GET['id'], FILTER_SANITIZE_NUMBER_INT);
 
+    $_SESSION['edit_faculty_id'] = $id;
+
     // fetch category from database
     $query = "SELECT * FROM faculties WHERE id=$id";
     $result = mysqli_query($connection, $query);
