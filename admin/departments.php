@@ -63,6 +63,15 @@ $faculties = mysqli_query($connection,$query);
            ?></p>
           </div>
         <?php } ?>
+        <?php if(isset($_SESSION['editDepartment-success'])){ ?>
+          <div class="alert alert-success mx-auto w-75">
+           <p>
+            <?= $_SESSION['editDepartment-success']; 
+            unset($_SESSION['editDepartment-success']);
+           ?></p>
+          </div>
+        <?php } ?>
+        
         <div class="row mt-4">
                 <div class="col-lg-12">
                     <table class="table table-bordered table-striped">
@@ -78,12 +87,12 @@ $faculties = mysqli_query($connection,$query);
                         <td><?= $department['name'] ?></td>
                         <td class="mx-auto">
                             <a
-                            href="../adminbackend/editdepartment.php?id=<?= $epartment['id'] ?>"
+                            href="editdepartments.php?id=<?= $department['id'] ?>"
                             class="text-warning"
                             ><i class="fa-solid fa-pen-to-square"></i></a
                             >&nbsp;&nbsp;&nbsp;&nbsp;
                             <a
-                            href="../adminbackend/deletedepartments.php?id=<?= $department['id'] ?>"
+                            href="../adminbackend/deletedepartment.php?id=<?= $department['id'] ?>"
                             class="text-danger" onclick="return confirm('Do you want to delete Departments?');"
                             ><i class="fa-solid fa-trash"></i></a
                             >

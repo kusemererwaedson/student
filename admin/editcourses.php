@@ -24,7 +24,6 @@
       // fetch faculties from database
       $query = "SELECT * FROM faculties";
       $faculties = mysqli_query($connection,$query);
-
 ?>
 
 <!-- -------------------editCourse popup--------------- -->
@@ -44,20 +43,16 @@
         <form action="../adminbackend/editcourse.php" class="form-horizontal w-50 mx-auto" method="POST">
              <input type="hidden" name="id" value="<?= $fetch['id'] ?>">
 
-             <input class="form-control my-2" name="name" value="<?= $fetch['name'] ; ?>">
+             <input class="form-control my-2" name="name" value="<?= $fetch['name'] ; ?>" required>
 
              <label for="faculty">SelectFaculty</label>
-              <select name="faculty" class="form-control my-2">
-                <?php while($faculty=mysqli_fetch_assoc($faculties)){?>
-                <option class="form-control my-2" value="<?= $faculty['id']; ?>"><?= $faculty['name']; ?></option>
-                <?php } ?>
+              <select name="faculty" id="faculty" class="form-control my-2" required>
+                <option class="form-control my-2" value="">Select Faculty</option>
               </select>
 
               <label for="departments">Select Departments</label>
-              <select name="departments" class="form-control my-2">
-                <?php while($department=mysqli_fetch_assoc($departments)){?>
-                <option class="form-control my-2" value="<?= $department['id']; ?>"><?= $department['name']; ?></option>
-                <?php } ?>
+              <select name="departments" id="departments" class="form-control my-2" required>
+                <option class="form-control my-2" value="">Select Departments</option>
               </select>
               <button type="submit"
               name="submit"
@@ -65,4 +60,45 @@
                 Edit Course
               </button>
             </form>
- </div>            
+ </div>    
+ 
+ 
+ <script>
+        $(document).ready(function() {
+            // Populate categories dropdown on page load
+            $.ajax({
+                type: 'GET',
+                url: 'jquery/getfaculty.php',
+                dataType: 'json',
+                success: function(data) {
+                    $.each(data, function(index, faculty) {
+                        $('#faculty').append('<option value="' + faculty.id + '">' + faculty.name + '</option>');
+                    });
+                }
+            });
+
+            // Handle category change event
+            $('#faculty').change(function() {
+                var faculty_id = $(this).val();
+
+                // Clear subcategory dropdown
+                 // Clear subcategory dropdown
+                 $('#departments').html('<option value="">Select Subcategory</option>');
+
+                if (faculty_id !== '') {
+                    // Populate subcategories dropdown based on selected category
+                    $.ajax({
+                        type: 'POST',
+                        url: 'jquery/getdepartments.php',
+                        data: { faculty_id: faculty_id },
+                        dataType: 'json',
+                        success: function(data) {
+                            $.each(data, function(index, department) {
+                                $('#departments').append('<option value="' + department.id + '">' + department.name + '</option>');
+                            });
+                        }
+                    });
+                }
+            });
+        });
+    </script>

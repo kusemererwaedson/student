@@ -1,9 +1,5 @@
 <?php
 require '../adminbackend/config/database.php';
-
-      // fetch courses from database
-      $query = "SELECT * FROM test";
-      $courses = mysqli_query($connection,$query);
 ?>
 <!DOCTYPE html>
 <html lang="en">

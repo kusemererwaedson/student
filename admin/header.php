@@ -33,6 +33,11 @@ if(!isset($_SESSION['user-id'])){
     <!-- css-bootstrap -->
     <link rel="stylesheet" href="../css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/dashboard.css" />
+
+    <!-- jquery -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+   
   </head>
   <body>
     <nav class="navbar expand-md navbar-light bg-dark fixed-top p-2">

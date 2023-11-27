@@ -17,11 +17,12 @@ if(isset($_POST['submit'])){
         $result = mysqli_query($connection,$query);
 
         if(mysqli_errno($connection)){
-            $_SESSION['editCourse'] = "Couldn't update course"; 
+            $echo = mysqli_error($connection);
+            $_SESSION['editCourse'] = $echo; 
             header('location: ../admin/courses.php');
         }
         else{
-            $_SESSION['editCourse-success'] = "Category $name updated successfully"; 
+            $_SESSION['editCourse-success'] = "Course $name updated successfully"; 
             header('location: ../admin/courses.php');
         }
     }

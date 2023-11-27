@@ -68,4 +68,4 @@ require 'config/database.php';
     $_SESSION['course-failure'] = "Course Registeration failed";
     die();
  }
-?>
+

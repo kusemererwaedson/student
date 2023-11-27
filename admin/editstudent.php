@@ -115,6 +115,33 @@
                 <option class="form-control my-2" value="<?= $course['id']; ?>"><?= $course['name']; ?></option>
                 <?php endwhile ?>
               </select>
+
+              <label for="reg_status" class="my-2">Select Registration status</label>
+              <select name="reg_status" class="form-control my-2" required>
+                <option class="form-control my-2" value="">Select Reg Status</option>
+                <option class="form-control my-2" value="registered">registered</option>
+                <option class="form-control my-2" value="pending">pending</option>
+              </select>
+              
+              <input
+                type="number"
+                name="year"
+                class="form-control my-2"
+                value="<?= $fetch['year'] ?>"
+                placeholder="Input Year"
+                required
+              />
+               
+              <input
+                type="number"
+                name="sem"
+                class="form-control my-2"
+                value="<?= $fetch['sem'] ?>"
+                placeholder="Input Semester"
+                required
+              />    
+
+
               <input
                 type="text"
                 name="password"

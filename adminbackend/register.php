@@ -11,6 +11,9 @@ require 'config/database.php';
     $course_id = filter_var($_POST['courses'], FILTER_SANITIZE_NUMBER_INT);
     $department_id = filter_var($_POST['departments'], FILTER_SANITIZE_NUMBER_INT);
     $faculty_id = filter_var($_POST['faculty'], FILTER_SANITIZE_NUMBER_INT);
+    $reg_status = filter_var($_POST['reg_status'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+    $year = filter_var($_POST['year'], FILTER_SANITIZE_NUMBER_INT);
+    $sem = filter_var($_POST['sem'], FILTER_SANITIZE_NUMBER_INT);
     $password = filter_var($_POST['password'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
     $confirmpassword = filter_var($_POST['passwordConfirm'], FILTER_SANITIZE_FULL_SPECIAL_CHARS); 
     $avatar = $_FILES['avatar'];
@@ -89,7 +92,7 @@ require 'config/database.php';
         header('location: ../admin/dashboard.php');
     }else{
         // insert new user into table
-        $insert_user_query = "INSERT INTO students(first_name, last_name, reg_number,email, phone, avatar, faculty_id, department_id, course_id, password) values('$firstname','$lastname','$regnumber','$email','$phone','$avatar_name','$faculty_id','$department_id','$course_id','$hashed_password')";
+        $insert_user_query = "INSERT INTO students(first_name, last_name, reg_number,email, phone, avatar,reg_status, year, sem, faculty_id, department_id, course_id, password) values('$firstname','$lastname','$regnumber','$email','$phone','$avatar_name','$reg_status','$year','$sem','$faculty_id','$department_id','$course_id','$hashed_password')";
         
         $insert_user_result= mysqli_query($connection,$insert_user_query);
         if($insert_user_result){

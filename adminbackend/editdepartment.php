@@ -3,26 +3,30 @@ require 'config/database.php';
 
 if(isset($_POST['submit'])){
     $id = filter_var($_POST['id'], FILTER_SANITIZE_NUMBER_INT);
-    $title = filter_var($_POST['title'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-    $description = filter_var($_POST['description'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+    $name = filter_var($_POST['name'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+    $faculty = filter_var($_POST['faculty'], FILTER_SANITIZE_NUMBER_INT);
     
 
     // validation input
-    if(!$title || !$description){
-        $_SESSION['edit-category'] = "Invalid form input on edit category page";
+    if(!$name){
+        $_SESSION['editDepartment'] = "Invalid form input on edit course page";
+        header('location: ../admin/courses.php');
     }else{
-        $query = "UPDATE categories SET title='$title',description='$description' WHERE id=$id LIMIT 1"; 
+        
+        $query = "UPDATE departments SET name='$name',faculty_id='$faculty' WHERE id=$id LIMIT 1"; 
         $result = mysqli_query($connection,$query);
 
         if(mysqli_errno($connection)){
-            $_SESSION['edit-category'] = "Couldn't update category"; 
+            $echo = mysqli_error($connection);
+            $_SESSION['editDepartment'] = $echo; 
+            header('location: ../admin/departments.php');
         }
         else{
-            $_SESSION['edit-category-success'] = "Category $title updated successfully"; 
-          
+            $_SESSION['editDepartment-success'] = "Department $name updated successfully"; 
+            header('location: ../admin/departments.php');
         }
     }
 }
-header('location:' . ROOT_URL. 'admin/manage-categories.php');
+header('location: ../admin/departments.php');
 die();
 ?>

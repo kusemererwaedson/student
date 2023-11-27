@@ -6,6 +6,10 @@
       $query = "SELECT * FROM students";
       $students = mysqli_query($connection,$query);
 
+      // fetch students DESC from database
+      $query = "SELECT * FROM students";
+      $student_s = mysqli_query($connection,$query);
+
       // fetch courses from database
       $query = "SELECT * FROM courses";
       $courses = mysqli_query($connection,$query);
@@ -110,7 +114,7 @@
                   <th scope="col">SECOND NAME</th>
                   <th scope="col">EMAIL</th>
                   <th scope="col">PHOTO</th>
-                  <th scope="col">PASSWORD</th>
+                  <th scope="col">REGISTRATION NUMBER</th>
                   <th scope="col">COURSE</th>
                   <th scope="col">ACTION</th>
                 </tr>
@@ -228,6 +232,32 @@
                 <option class="form-control my-2" value="<?= $course['id']; ?>"><?= $course['name']; ?></option>
                 <?php endwhile ?>
               </select>
+
+              <label for="reg_status" class="my-2">Select Registration status</label>
+              <select name="reg_status" class="form-control my-2">
+                <option class="form-control my-2" value="">Select Reg Status</option>
+                <option class="form-control my-2" value="registered">registered</option>
+                <option class="form-control my-2" value="pending">pending</option>
+              </select>
+              
+              <input
+                type="number"
+                name="year"
+                class="form-control my-2"
+                value=""
+                placeholder="Input Year"
+                required
+              />
+               
+              <input
+                type="number"
+                name="sem"
+                class="form-control my-2"
+                value=""
+                placeholder="Input Semester"
+                required
+              />    
+
               <input
                 type="text"
                 name="password"
