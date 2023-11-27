@@ -151,4 +151,12 @@
         -webkit-transform: translateX(-50%) translateY(-50%);
         transform: translateX(-50%) translateY(-50%);
       }
+/* =============================== MEDIA QUERIES (MEDIUM DEVICES) ============================= */
+@media screen and (max-width: 1024px){
+ 
+}
+/* =============================== MEDIA QUERIES (SMALL DEVICES) ============================= */
+@media screen and (max-width: 600px){
+ 
+}
       
