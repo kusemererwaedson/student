@@ -3,8 +3,8 @@
 <?php include('includes/sidebar.php'); ?>
 
 <?php
-if(isset($_SESSION['user-id'])){
-  $id=($_SESSION['user-id']);
+if(isset($_SESSION['student-id'])){
+  $id=($_SESSION['student-id']);
   $sql = "SELECT * FROM students WHERE id=$id";
   $query = mysqli_query($connection,$sql);
 }
