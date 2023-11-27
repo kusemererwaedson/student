@@ -36,13 +36,15 @@ if(!isset($_SESSION['user-id'])){
 
     <!-- jquery -->
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-
+<?php 
+$id=($_SESSION['student-id']);
+?>
    
   </head>
   <body>
     <nav class="navbar expand-md navbar-light bg-dark fixed-top p-2">
       <div class="container text-white">
         <a href="" class="navbar-brand text-white">Dashboard</a>
-        <button class="btn btn-primary"><a href="../adminbackend/logout.php" class="navbar-brand text-white">Logout</a></button>
+        <button class="btn btn-primary"><a href="../adminbackend/logout_admin.php?id=<?= $id; ?>" class="navbar-brand text-white">Logout</a></button>
       </div>
     </nav>
