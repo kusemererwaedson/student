@@ -13,7 +13,8 @@
             $query_enroll_row  = mysqli_fetch_assoc($query_enroll);
             $reg_status = $query_enroll_row['reg_status'];
 
-            if($reg_status == "pending"): ?>
+            if($reg_status == "pending"):
+             ?>
                   <div class="row-lg-12 my-1 py-4">
                   <a class="text-primary ml-3" style="text-decoration: none;" href="./enroll.php"><i class="fa-regular fa-id-card"></i>&nbsp;&nbsp;&nbsp;&nbsp;Enroll</a>
                   </div>
