@@ -21,13 +21,6 @@ if(isset($_SESSION['student-id'])){
                 </div>
         </div>        
         <hr class="bg-info">
-        <?php if(isset($_SESSION['enroll'])): ?>
-        <div class="alert alert-success w-50 mx-auto">
-            <?= $_SESSION['enroll']; 
-            unset($_SESSION['enroll']);
-            ?> 
-        </div>
-        <?php endif; ?>
         <?php if(isset($_SESSION['enroll-failure'])): ?>
         <div class="alert alert-danger w-50 mx-auto">
             <?= $_SESSION['enroll-failure']; 

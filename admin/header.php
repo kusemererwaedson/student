@@ -42,7 +42,7 @@ $id=($_SESSION['student-id']);
    
   </head>
   <body>
-    <nav class="navbar expand-md navbar-light bg-dark fixed-top p-2">
+    <nav class="navbar expand-md navbar-light bg-dark fixed-top p-3">
       <div class="container text-white">
         <a href="" class="navbar-brand text-white">Dashboard</a>
         <button class="btn btn-primary"><a href="../adminbackend/logout_admin.php?id=<?= $id; ?>" class="navbar-brand text-white">Logout</a></button>

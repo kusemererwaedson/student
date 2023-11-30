@@ -28,6 +28,13 @@ if(isset($_SESSION['student-id'])){
             ?> 
         </div>
         <?php endif; ?>
+        <?php if(isset($_SESSION['enroll'])): ?>
+        <div class="alert alert-success w-50 mx-auto">
+            <?= $_SESSION['enroll']; 
+            unset($_SESSION['enroll']);
+            ?> 
+        </div>
+        <?php endif; ?>
         <?php if(isset($_SESSION['student-success'])): ?>
         <div class="alert alert-success w-25 mx-auto">
             <?= $_SESSION['student-success']; 

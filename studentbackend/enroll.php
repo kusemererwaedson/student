@@ -8,7 +8,7 @@ if(isset($_POST['submit'])){
 
     if($query){
         echo 'hello';
-        header('Location: ../enroll.php');
+        header('Location: ../dashboard.php');
         $_SESSION['enroll'] = "You have been Enrolled Successfully";
     }else{
         header('Location: ../enroll.php');

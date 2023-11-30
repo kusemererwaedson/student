@@ -1,5 +1,5 @@
 <?php include('header.php'); ?>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <?php include('includes/sidebar.php'); ?>
 
 <?php
@@ -27,7 +27,7 @@ $faculties = mysqli_query($connection,$query);
                     <i class="fa-solid fa-user-plus"></i>&nbsp;&nbsp;<a
                       href=""
                       data-bs-toggle="modal"
-                      data-bs-target="#addCourse"
+                      data-bs-target="#addCoursedata"
                       class="btn"
                       >Add New Course</a
                     >
@@ -105,17 +105,19 @@ $faculties = mysqli_query($connection,$query);
                         <tr>
                         <td><?= $course['name'] ?></td>
                         <td class="mx-auto">
-                            <a
-                            href="editcourses.php?id=<?= $course['id'] ?>"
+                        <a
+                            href="../admin/editcourses.php?id=<?= $course['id'] ?>"
                             class="text-warning"
                             ><i class="fa-solid fa-pen-to-square"></i></a
-                            >&nbsp;&nbsp;&nbsp;&nbsp;
+                            >
+                             &nbsp;&nbsp;&nbsp;&nbsp;
                             <a
                             href="../adminbackend/deletecourse.php?id=<?= $course['id'] ?>"
                             class="text-danger" onclick="return confirm('Do you want to delete course?');"
                             ><i class="fa-solid fa-trash"></i></a
                             >
                         </td>
+
                         <?php endwhile ?>
                     </tbody>
                     </table>
@@ -124,10 +126,12 @@ $faculties = mysqli_query($connection,$query);
             </div>
         </div>
     </div>
-            <!-- -------------------addCourse popup--------------- -->
-            <div
+           
+
+                <!-- -------------------addCourse popup--------------- -->
+                <div
       class="modal fade"
-      id="addCourse"
+      id="addCoursedata"
       data-bs-backdrop="static"
       data-bs-keyboard="false"
     >
@@ -175,8 +179,7 @@ $faculties = mysqli_query($connection,$query);
         </div>
       </div>
     </div>
-
-     
+    
  <script>
         $(document).ready(function() {
             // Populate categories dropdown on page load
